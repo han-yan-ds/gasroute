@@ -1,47 +1,47 @@
-create database gasPrices;
+create database gasprices;
 
-\c gasPrices;
+\c gasprices;
 
-create table gasStations (
-  stationId serial primary key,
-  stationName varchar(50),
-  stationStreetAddress varchar(255),
-  stationCity varchar(50),
-  stationState varchar(2),
-  stationZip int CHECK (stationZip > 9999) CHECK (stationZip < 100000),
-  needMembership bit default(0),
+create table gasstations (
+  stationid serial primary key,
+  stationname varchar(50),
+  stationstreetaddress varchar(255),
+  stationcity varchar(50),
+  stationstate varchar(2),
+  stationzip int CHECK (stationzip > 9999) CHECK (stationzip < 100000),
+  needmembership bit default(cast(0 as bit)),
   latitude numeric(8, 6),
   longitude numeric(8, 6)
 );
 
 create table octanes (
-  octaneId serial primary key,
-  octaneName varchar(15)
+  octaneid serial primary key,
+  octanename varchar(15)
 );
 
 create table prices (
-  priceId serial primary key,
-  stationId int references gasStations(stationId),
-  reportTime dateTime,
-  octaneId int references octanes(octaneId)
+  priceid serial primary key,
+  stationid int references gasstations(stationid),
+  reportdate date,
+  octaneid int references octanes(octaneid)
 );
 
-create index stationIdPricesIndex on prices(stationId);
-create index octaneIdPricesIndex on prices(octaneId);
+create index stationidpricesindex on prices(stationid);
+create index octaneidpricesindex on prices(octaneid);
 
 create table users (
-  userId serial primary key,
-  pwHash varchar(64)
+  userid serial primary key,
+  pwhash varchar(64)
 );
 
 create table reviews (
-  reviewId serial primary key,
-  stationId int references gasStations(stationId),
-  reviewerId int references users(userId),
-  reviewDate dateTime,
-  reviewRating int,
-  reviewDescription varchar(2000)
+  reviewid serial primary key,
+  stationid int references gasStations(stationid),
+  reviewerid int references users(userid),
+  reviewdate date,
+  reviewrating int,
+  reviewdescription varchar(2000)
 );
 
-create index stationIdReviewsIndex on reviews(stationId);
-create index reviewerIdReviewsIndex on reviews(reviewerId);
+create index stationidreviewsindex on reviews(stationid);
+create index revieweridreviewsindex on reviews(reviewerid);
