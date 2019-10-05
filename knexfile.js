@@ -3,10 +3,8 @@ module.exports = {
 
   development: {
     client: 'pg',
-    // connection: 'postgres://localhost/greenfield',
     connection: {
       host: 'localhost',
-      port: 4000, // not sure about syntax for this one
       database: 'gasprices',
       user: 'han',
       password: 'face468a',
