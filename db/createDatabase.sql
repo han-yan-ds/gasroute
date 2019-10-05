@@ -19,6 +19,11 @@ create table octanes (
   octanename varchar(15)
 );
 
+insert into octanes (octanename) values ('Regular');
+insert into octanes (octanename) values ('Mid-Grade');
+insert into octanes (octanename) values ('Premium');
+insert into octanes (octanename) values ('Diesel');
+
 create table prices (
   priceid serial primary key,
   stationid int references gasstations(stationid),
