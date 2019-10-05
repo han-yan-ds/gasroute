@@ -26,6 +26,7 @@ insert into octanes (octanename) values ('Diesel');
 
 create table prices (
   priceid serial primary key,
+  price numeric(3, 2),
   stationid int references gasstations(stationid),
   reportdate date,
   octaneid int references octanes(octaneid)
