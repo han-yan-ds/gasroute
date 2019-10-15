@@ -2,7 +2,7 @@ create database gasprices;
 
 \c gasprices;
 
-create table gasstations (
+create table stations (
   stationid serial primary key,
   stationname varchar(50),
   stationstreetaddress varchar(255),
@@ -27,7 +27,7 @@ insert into octanes (octanename) values ('Diesel');
 create table prices (
   priceid serial primary key,
   price numeric(3, 2),
-  stationid int references gasstations(stationid),
+  stationid int references stations(stationid),
   reportdate date,
   octaneid int references octanes(octaneid)
 );
@@ -42,7 +42,7 @@ create table users (
 
 create table reviews (
   reviewid serial primary key,
-  stationid int references gasStations(stationid),
+  stationid int references stations(stationid),
   reviewerid int references users(userid),
   reviewdate date,
   reviewrating int,
