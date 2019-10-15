@@ -38,6 +38,7 @@ create index octaneidpricesindex on prices(octaneid);
 
 create table users (
   userid serial primary key,
+  username varchar(50),
   pwhash varchar(64)
 );
 
