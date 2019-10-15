@@ -10,8 +10,9 @@ create table stations (
   stationstate varchar(2),
   stationzip int CHECK (stationzip > 9999) CHECK (stationzip < 100000),
   needmembership bit default(cast(0 as bit)),
-  latitude numeric(8, 6),
-  longitude numeric(8, 6)
+  latitude numeric(11, 7),
+  longitude numeric(11, 7),
+  placeid varchar(30) UNIQUE
 );
 
 create table octanes (
