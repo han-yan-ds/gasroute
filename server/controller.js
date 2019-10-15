@@ -19,7 +19,7 @@ exports.postPrice = async (req, res) => {
   let testPrice = {
     price: 2.59,
     stationid: 1,
-    reportdate: moment.now(),
+    reporttime: moment().format('YYYY-MM-DD HH:mm:ss'),
     octaneid: 1,
   }
   let response = await model.postPrice(testPrice);
