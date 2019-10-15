@@ -1,11 +1,11 @@
 require('custom-env').env();
 const {development} = require('../knexfile');
 const knex = require('knex')(development);
+const axios = require('axios');
 const {
   extractAddressPart,
   addressStringSpacesToPluses
 } = require('../util/util');
-const axios = require('axios');
 
 exports.postStation = async (stationObj) => {
   // make sure there's enough information to geocode first
@@ -60,6 +60,21 @@ exports.postPrice = async (priceObj) => {
     });
   } catch (err) {
     console.error('Error in inserting price data');
-    console.error(err);
+    return;
+  }
+}
+
+exports.postReview = async (reviewObj) => {
+  try {
+    await knex('reviews').insert({
+      stationid: reviewObj.stationId,
+      reviewerid: reviewObj.userId,
+      reviewtime: reviewObj.reviewTime,
+      reviewrating: reviewObj.reviewRating,
+      reviewdescription: reviewObj.reviewDescription,
+    });
+  } catch (err) {
+    console.error('Error in inserting review');
+    return;
   }
 }

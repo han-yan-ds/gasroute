@@ -38,6 +38,7 @@ create index octaneidpricesindex on prices(octaneid);
 
 create table users (
   userid serial primary key,
+  username varchar(50),
   pwhash varchar(64)
 );
 
@@ -46,7 +47,7 @@ create table reviews (
   stationid int references stations(stationid),
   reviewerid int references users(userid),
   reviewtime timestamp,
-  reviewrating int,
+  reviewrating int CHECK (reviewrating > 0) CHECK (reviewrating < 6),
   reviewdescription varchar(2000)
 );
 
