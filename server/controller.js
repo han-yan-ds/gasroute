@@ -1,4 +1,5 @@
 const model = require('./model');
+const moment = require('moment');
 
 exports.postStation = async (req, res) => {
   let testBody = {
@@ -11,5 +12,16 @@ exports.postStation = async (req, res) => {
 
   // console.log(req.body);
   // let response = await model.postStation(req.body);
+  res.json(response);
+}
+
+exports.postPrice = async (req, res) => {
+  let testPrice = {
+    price: 2.59,
+    stationid: 1,
+    reportdate: moment.now(),
+    octaneid: 1,
+  }
+  let response = await model.postPrice(testPrice);
   res.json(response);
 }
