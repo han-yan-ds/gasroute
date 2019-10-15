@@ -46,7 +46,7 @@ create table reviews (
   stationid int references stations(stationid),
   reviewerid int references users(userid),
   reviewtime timestamp,
-  reviewrating int,
+  reviewrating int CHECK (reviewrating > 0) CHECK (reviewrating < 6),
   reviewdescription varchar(2000)
 );
 

@@ -6,7 +6,9 @@ const path = require('path');
 
 const {
   postStation,
-  postPrice
+  postPrice,
+  // postUser,
+  postReview,
 } = require('./controller');
 
 const app = express();
@@ -17,6 +19,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.post('/stations', postStation); // report new station
 app.post('/prices', postPrice); // report new price
-// app.post('/reviews', postReview); // submit new review
+// app.post('/users', postUser); // add new user
+app.post('/reviews', postReview); // submit new review
 
 app.listen(PORT, () => `Server is listening on port ${PORT}`);
