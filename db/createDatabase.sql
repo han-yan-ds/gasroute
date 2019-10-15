@@ -28,7 +28,7 @@ create table prices (
   priceid serial primary key,
   price numeric(3, 2),
   stationid int references stations(stationid),
-  reportdate date,
+  reporttime timestamp,
   octaneid int references octanes(octaneid)
 );
 
@@ -44,7 +44,7 @@ create table reviews (
   reviewid serial primary key,
   stationid int references stations(stationid),
   reviewerid int references users(userid),
-  reviewdate date,
+  reviewtime timestamp,
   reviewrating int,
   reviewdescription varchar(2000)
 );

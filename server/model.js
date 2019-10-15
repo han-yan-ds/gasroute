@@ -29,10 +29,11 @@ exports.postPrice = async (priceObj) => {
     await knex('prices').insert({
       price: priceObj.price,
       stationid: priceObj.stationid,
-      reportdate: priceObj.reportdate,
+      reporttime: priceObj.reporttime,
       octaneid: priceObj.octaneid,
-    })
+    });
   } catch (err) {
-    console.error('Error in inserting price data');
+    // console.error('Error in inserting price data');
+    console.error(err);
   }
 }
