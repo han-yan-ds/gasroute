@@ -16,7 +16,7 @@ exports.postStation = async (stationObj) => {
     })
   } catch (err) {
     console.error('Error in inserting station data');
-    // console.error(err);
+    console.error(err);
   }
   // try {
   //   // now try to insert city, state, latitude, longitude, from
@@ -33,7 +33,7 @@ exports.postPrice = async (priceObj) => {
       octaneid: priceObj.octaneid,
     });
   } catch (err) {
-    // console.error('Error in inserting price data');
+    console.error('Error in inserting price data');
     console.error(err);
   }
 }
