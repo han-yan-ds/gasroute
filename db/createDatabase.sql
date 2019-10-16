@@ -31,6 +31,7 @@ create table prices (
   stationid int references stations(stationid),
   reporttime timestamp,
   octaneid int references octanes(octaneid),
+  userid int references users(userid),
   flagged bit default(cast(0 as bit))
 );
 
