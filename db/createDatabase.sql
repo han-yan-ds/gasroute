@@ -37,6 +37,7 @@ create table prices (
 
 create index stationidpricesindex on prices(stationid);
 create index octaneidpricesindex on prices(octaneid);
+create index useridpricesindex on prices(userid);
 
 create table users (
   userid serial primary key,
