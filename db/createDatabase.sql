@@ -30,7 +30,8 @@ create table prices (
   price numeric(3, 2),
   stationid int references stations(stationid),
   reporttime timestamp,
-  octaneid int references octanes(octaneid)
+  octaneid int references octanes(octaneid),
+  flagged bit default(cast(0 as bit))
 );
 
 create index stationidpricesindex on prices(stationid);
@@ -48,7 +49,8 @@ create table reviews (
   reviewerid int references users(userid),
   reviewtime timestamp,
   reviewrating int CHECK (reviewrating > 0) CHECK (reviewrating < 6),
-  reviewdescription varchar(2000)
+  reviewdescription varchar(2000),
+  flagged bit default(cast(0 as bit))
 );
 
 create index stationidreviewsindex on reviews(stationid);
