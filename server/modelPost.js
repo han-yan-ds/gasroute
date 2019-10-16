@@ -1,6 +1,6 @@
 require('custom-env').env();
-const {development} = require('../knexfile');
-const knex = require('knex')(development);
+const knexMode = require('../knexfile')[process.env.KNEX_MODE];
+const knex = require('knex')(knexMode);
 const axios = require('axios');
 const {
   extractAddressPart,
