@@ -31,11 +31,13 @@ create table prices (
   stationid int references stations(stationid),
   reporttime timestamp,
   octaneid int references octanes(octaneid),
+  userid int references users(userid),
   flagged bit default(cast(0 as bit))
 );
 
 create index stationidpricesindex on prices(stationid);
 create index octaneidpricesindex on prices(octaneid);
+create index useridpricesindex on prices(userid);
 
 create table users (
   userid serial primary key,
