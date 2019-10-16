@@ -1,29 +1,34 @@
-const model = require('./model');
+const modelPost = require('./modelPost');
 const moment = require('moment');
 
 exports.postStation = async (req, res) => {
+  // remove
   let testBody = {
-    name: 'Sinclair Washington Park',
+    name: 'Sinclair',
     streetAddress: '1121 E Alameda Ave',
     zip: 80209,
     needMembership: 0,
   };
-  let response = await model.postStation(testBody);
+  // remove
+  let response = await modelPost.postStation(testBody);
   res.json(response);
 }
 
 exports.postPrice = async (req, res) => {
+  // remove
   let testPrice = {
-    price: 2.59,
+    price: 3.49,
     stationId: 1,
     reportTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-    octaneId: 1,
+    octaneId: 4,
   };
-  let response = await model.postPrice(testPrice);
+  // remove
+  let response = await modelPost.postPrice(testPrice);
   res.json(response);
 }
 
 exports.postReview = async (req, res) => {
+  // remove
   let testReview = {
     stationId: 1,
     userId: 1,
@@ -31,7 +36,8 @@ exports.postReview = async (req, res) => {
     reviewRating: 4,
     reviewDescription: "There's gas here",
   };
-  let response = await model.postReview(testReview);
+  // remove
+  let response = await modelPost.postReview(testReview);
   res.json(response);
 }
 
