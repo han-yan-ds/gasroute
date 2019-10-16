@@ -8,8 +8,15 @@ const {
   postStation,
   postPrice,
   // postUser,
-  postReview,
-} = require('./controller');
+  postReview
+} = require('./controllerPost');
+
+const {
+  patchStation,
+  // patchUser,
+  // flagPrice,
+  // flagReview,
+} = require('./controllerPatch');
 
 const app = express();
 app.use(cors());
@@ -25,7 +32,7 @@ app.post('/stations', postStation); // report new station
 app.post('/prices', postPrice); // report new price
 // app.post('/users', postUser); // add new user
 app.post('/reviews', postReview); // submit new review
-// app.patch('/stations'); // update station information
+app.patch('/stations', patchStation); // update station information
 // app.patch('/users'); // update user information 
 // app.patch('/prices/flag'); // flags a price
 // app.patch('/reviews/flag'); // flags a review

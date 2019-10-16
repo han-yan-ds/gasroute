@@ -7,7 +7,7 @@ const {
   addressStringSpacesToPluses
 } = require('../util/util');
 
-exports.postStation = async (stationObj) => {
+exports.postStation = async (stationObj, cb = (data) => data) => {
   // make sure there's enough information to geocode first
   if ((!stationObj.zip || stationObj.zip === '') && 
     ((!stationObj.city || stationObj.city === '') || 
@@ -27,7 +27,7 @@ exports.postStation = async (stationObj) => {
     } else {
       // address is valid, add station to database!
       try {
-        await knex('stations').insert({
+        cb(await knex('stations').insert({
           stationname: stationObj.name,
           stationstreetaddress: `${extractAddressPart(data.results[0].address_components, 'street_number')} ${extractAddressPart(data.results[0].address_components, 'route', false)}`,
           stationcity: extractAddressPart(data.results[0].address_components, 'locality'),
@@ -37,7 +37,7 @@ exports.postStation = async (stationObj) => {
           latitude: data.results[0].geometry.location.lat,
           longitude: data.results[0].geometry.location.lng,
           placeid: data.results[0].place_id
-        })
+        }));
       } catch (err) {
         console.error('Error in inserting station data');
         return;
@@ -50,29 +50,29 @@ exports.postStation = async (stationObj) => {
 
 }
 
-exports.postPrice = async (priceObj) => {
+exports.postPrice = async (priceObj, cb = (data) => data) => {
   try {
-    await knex('prices').insert({
+    cb(await knex('prices').insert({
       price: priceObj.price,
       stationid: priceObj.stationId,
       reporttime: priceObj.reportTime,
       octaneid: priceObj.octaneId,
-    });
+    }));
   } catch (err) {
     console.error('Error in inserting price data');
     return;
   }
 }
 
-exports.postReview = async (reviewObj) => {
+exports.postReview = async (reviewObj, cb = (data) => data) => {
   try {
-    await knex('reviews').insert({
+    cb(await knex('reviews').insert({
       stationid: reviewObj.stationId,
-      reviewerid: reviewObj.userId,
+      reviewerid: reviewObj.reviewerId,
       reviewtime: reviewObj.reviewTime,
       reviewrating: reviewObj.reviewRating,
       reviewdescription: reviewObj.reviewDescription,
-    });
+    }));
   } catch (err) {
     console.error('Error in inserting review');
     return;

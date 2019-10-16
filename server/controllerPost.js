@@ -4,9 +4,9 @@ const moment = require('moment');
 exports.postStation = async (req, res) => {
   // remove
   let testBody = {
-    name: 'Sinclair',
-    streetAddress: '1121 E Alameda Ave',
-    zip: 80209,
+    stationName: 'Conoco',
+    stationStreetAddress: '1690 Pearl St, Denver, CO 80203',
+    stationZip: 80203,
     needMembership: 0,
   };
   // remove
@@ -17,10 +17,10 @@ exports.postStation = async (req, res) => {
 exports.postPrice = async (req, res) => {
   // remove
   let testPrice = {
-    price: 3.49,
-    stationId: 1,
+    price: 2.69,
+    stationId: 2,
     reportTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-    octaneId: 4,
+    octaneId: 1,
   };
   // remove
   let response = await modelPost.postPrice(testPrice);
@@ -30,11 +30,11 @@ exports.postPrice = async (req, res) => {
 exports.postReview = async (req, res) => {
   // remove
   let testReview = {
-    stationId: 1,
-    userId: 1,
+    stationId: 2,
+    reviewerId: 1,
     reviewTime: moment().format('YYYY-MM-DD HH:mm:ss'),
     reviewRating: 4,
-    reviewDescription: "There's gas here",
+    reviewDescription: "There's closer gas here",
   };
   // remove
   let response = await modelPost.postReview(testReview);
@@ -42,3 +42,4 @@ exports.postReview = async (req, res) => {
 }
 
 // exports.postUser
+  // register new user
