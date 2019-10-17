@@ -14,8 +14,10 @@ const {
 const {
   patchStation,
   // patchUser,
-  // flagPrice,
-  // flagReview,
+  flagPrice,
+  unflagPrice,
+  flagReview,
+  unflagReview
 } = require('./controllerPatch');
 
 const app = express();
@@ -34,8 +36,10 @@ app.post('/prices', postPrice); // report new price
 app.post('/reviews', postReview); // submit new review
 app.patch('/stations', patchStation); // update station information
 // app.patch('/users'); // update user information 
-// app.patch('/prices/flag'); // flags a price
-// app.patch('/reviews/flag'); // flags a review
+app.patch('/prices/flag/:priceid', flagPrice); // flags a price
+app.patch('/prices/unflag/:priceid', unflagPrice); // flags a review
+app.patch('/reviews/flag/:reviewid', flagReview); // flags a review
+app.patch('/reviews/unflag/:reviewid', unflagReview); // flags a review
 // app.delete('/stations'); // delete station if no longer exists
 // app.delete('/prices'); // deletes a price
 // app.delete('/reviews'); // deletes a review
