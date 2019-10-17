@@ -15,26 +15,38 @@ exports.patchStation = async (testBody, cb = (data) => data) => {
 
 exports.toggleFlagPrice = async (priceBody, cb = (data) => data) => {
   try {
-    cb(await knex('prices').where({
-      priceid: priceBody.priceId
-    }).update({
-      flagged: priceBody.flagged
-    }));
+    let foundPriceId = await knex('prices').where({priceid: priceBody.priceId}).select('flagged');
+    if (foundPriceId.length === 0) { // price id not found
+      console.error('PriceId not found');
+      return;
+    } else { // price id found
+      cb(await knex('prices').where({
+        priceid: priceBody.priceId
+      }).update({
+        flagged: priceBody.flagged
+      }));
+    }
   } catch (err) {
-    console.error('Error flagging price');
+    console.error('Error flagging/unflagging price');
     return;
   }
 }
 
 exports.toggleFlagReview = async (reviewBody, cb = (data) => data) => {
   try {
-    cb(await knex('reviews').where({
-      reviewid: reviewBody.reviewId
-    }).update({
-      flagged: reviewBody.flagged
-    }));
+    let foundReviewId = await knex('reviews').where({reviewid: reviewBody.reviewId}).select('flagged');
+    if (foundReviewId.length === 0) { // review id not found
+      console.error('ReviewId not found');
+      return;
+    } else {
+      cb(await knex('reviews').where({
+        reviewid: reviewBody.reviewId
+      }).update({
+        flagged: reviewBody.flagged
+      }));
+    }
   } catch (err) {
-    console.error('Error flagging price');
+    console.error('Error flagging/unflagging price');
     return;
   }
 }
