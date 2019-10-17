@@ -5,6 +5,18 @@ const modelPatch = require('./modelPatch');
 
 exports.archiveStation = async (stationId, cb = (data) => data) => {
   // should I delete station or merely archive it?????  deleting will mean I'll delete every price and review ever gotten from it
+  try {
+    let foundStationId = await knex('stations').where({stationid: stationId, archived: 0}).select();
+    if (foundStationId.length === 0) { // non-archived station id not found
+      console.error('StationId not found');
+      return;
+    } else { // station id is found
+      cb(await knex('stations').where({stationid: stationId}).update({archived: 1}));
+    }
+  } catch (err) {
+    console.error('Error archiving station');
+    return;
+  }
 }
 
 exports.deletePrice = async (priceId, cb = (data) => data) => {

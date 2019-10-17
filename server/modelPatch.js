@@ -15,7 +15,7 @@ exports.patchStation = async (testBody, cb = (data) => data) => {
 
 exports.toggleFlagPrice = async (priceBody, cb = (data) => data) => {
   try {
-    let foundPriceId = await knex('prices').where({priceid: priceBody.priceId}).select('flagged');
+    let foundPriceId = await knex('prices').where({priceid: priceBody.priceId}).select();
     if (foundPriceId.length === 0) { // price id not found
       console.error('PriceId not found');
       return;
@@ -34,7 +34,7 @@ exports.toggleFlagPrice = async (priceBody, cb = (data) => data) => {
 
 exports.toggleFlagReview = async (reviewBody, cb = (data) => data) => {
   try {
-    let foundReviewId = await knex('reviews').where({reviewid: reviewBody.reviewId}).select('flagged');
+    let foundReviewId = await knex('reviews').where({reviewid: reviewBody.reviewId}).select();
     if (foundReviewId.length === 0) { // review id not found
       console.error('ReviewId not found');
       return;
