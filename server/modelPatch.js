@@ -25,3 +25,16 @@ exports.toggleFlagPrice = async (priceBody, cb = (data) => data) => {
     return;
   }
 }
+
+exports.toggleFlagReview = async (reviewBody, cb = (data) => data) => {
+  try {
+    cb(await knex('reviews').where({
+      reviewid: reviewBody.reviewId
+    }).update({
+      flagged: reviewBody.flagged
+    }));
+  } catch (err) {
+    console.error('Error flagging price');
+    return;
+  }
+}

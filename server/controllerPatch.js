@@ -29,3 +29,19 @@ exports.unflagPrice = async (req, res) => {
   });
   res.json(response);
 }
+
+exports.flagReview = async (req, res) => {
+  let response = await modelPatch.toggleFlagReview({
+    reviewId: Number(req.params.reviewid),
+    flagged: 1,
+  });
+  res.json(response);
+}
+
+exports.unflagReview = async (req, res) => {
+  let response = await modelPatch.toggleFlagReview({
+    reviewId: Number(req.params.reviewid),
+    flagged: 0,
+  });
+  res.json(response);
+}
