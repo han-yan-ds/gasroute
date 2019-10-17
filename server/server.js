@@ -48,7 +48,7 @@ app.patch('/reviews/flag/:reviewid', flagReview); // flags a review
 app.patch('/reviews/unflag/:reviewid', unflagReview); // flags a review
 // app.delete('/stations/:stationid', deleteStation); // delete station if no longer exists
 app.delete('/prices/:priceid', deletePrice); // deletes a price
-app.delete('/reviews/reviewid', deleteReview); // deletes a review
+app.delete('/reviews/:reviewid', deleteReview); // deletes a review
 
 
 app.listen(PORT, () => `Server is listening on port ${PORT}`);

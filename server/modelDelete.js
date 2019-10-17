@@ -26,5 +26,19 @@ exports.deletePrice = async (priceId, cb = (data) => data) => {
 } 
 
 exports.deleteReview = async (reviewId, cb = (data) => data) => {
-
+  try {
+    let foundReviewId = await knex('reviews').where({reviewid: reviewId}).select('flagged');
+    if (foundReviewId.length === 0) { // review id not found
+      console.error('ReviewId not found');
+      return;
+    } else if (Number(foundReviewId[0].flagged) === 0) { // review isn't flagged
+      console.error('Review wasn\'t flagged for removal.  It\'s flagged now, call delete again to delete permanently.');
+      cb(await modelPatch.toggleFlagReview({reviewId, flagged: 1}));
+    } else { // review is flagged, ready to delete
+      cb(await knex('reviews').where({reviewid: reviewId}).del());
+    }
+  } catch(err) {
+    console.error('Error deleting review');
+    return;
+  }
 }

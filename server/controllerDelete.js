@@ -10,5 +10,6 @@ exports.deletePrice = async (req, res) => {
 }
 
 exports.deleteReview = async (req, res) => {
-
+  let response = await modelDelete.deleteReview(Number(req.params.reviewid));
+  res.json(response);
 }
