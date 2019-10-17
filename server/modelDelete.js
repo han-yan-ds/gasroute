@@ -1,4 +1,30 @@
-equire('custom-env').env();
+require('custom-env').env();
 const knexMode = require('../knexfile')[process.env.KNEX_MODE];
 const knex = require('knex')(knexMode);
+const modelPatch = require('./modelPatch');
 
+exports.deleteStation = async (stationId, cb = (data) => data) => {
+
+}
+
+exports.deletePrice = async (priceId, cb = (data) => data) => {
+  try {
+    let foundPriceId = await knex('prices').where({priceid: priceId}).select('flagged');
+    if (foundPriceId.length === 0) { // price id not found
+      console.error('PriceId not found');
+      return;
+    } else if (Number(foundPriceId[0].flagged) === 0) { // price isn't flagged
+      console.error('Price wasn\'t flagged for removal.  It\'s flagged now, call delete again to delete permanently.');
+      cb(await modelPatch.toggleFlagPrice({priceId, flagged: 1}));
+    } else { // price is flagged, ready to delete
+      cb(await knex('prices').where({priceid: priceId}).del());
+    }
+  } catch(err) {
+    console.error('Error deleting price');
+    return;
+  }
+} 
+
+exports.deleteReview = async (reviewId, cb = (data) => data) => {
+
+}

@@ -21,7 +21,7 @@ exports.toggleFlagPrice = async (priceBody, cb = (data) => data) => {
       flagged: priceBody.flagged
     }));
   } catch (err) {
-    console.error('Error flagging price');
+    console.error('Error flagging/unflagging price');
     return;
   }
 }
@@ -34,7 +34,7 @@ exports.toggleFlagReview = async (reviewBody, cb = (data) => data) => {
       flagged: reviewBody.flagged
     }));
   } catch (err) {
-    console.error('Error flagging price');
+    console.error('Error flagging/unflagging price');
     return;
   }
 }

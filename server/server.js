@@ -20,6 +20,12 @@ const {
   unflagReview
 } = require('./controllerPatch');
 
+const {
+  // deleteStation,
+  deletePrice,
+  deleteReview,
+} = require('./controllerDelete');
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -40,9 +46,9 @@ app.patch('/prices/flag/:priceid', flagPrice); // flags a price
 app.patch('/prices/unflag/:priceid', unflagPrice); // flags a review
 app.patch('/reviews/flag/:reviewid', flagReview); // flags a review
 app.patch('/reviews/unflag/:reviewid', unflagReview); // flags a review
-// app.delete('/stations'); // delete station if no longer exists
-// app.delete('/prices'); // deletes a price
-// app.delete('/reviews'); // deletes a review
+// app.delete('/stations/:stationid', deleteStation); // delete station if no longer exists
+app.delete('/prices/:priceid', deletePrice); // deletes a price
+app.delete('/reviews/reviewid', deleteReview); // deletes a review
 
 
 app.listen(PORT, () => `Server is listening on port ${PORT}`);
