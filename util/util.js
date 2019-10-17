@@ -11,3 +11,7 @@ exports.extractAddressPart = (components, part, getLong = true) => {
 exports.addressStringSpacesToPluses = (streetAddress, city, state, zip) => {
   return `${streetAddress} ${city || ''} ${state || ''} ${zip || ''}`.trim().replace(/ +(?= )/g,'').replace(/ /g, '+');
 }
+
+exports.handleRequestErrors = (err, message) => {
+  console.error(message);
+}

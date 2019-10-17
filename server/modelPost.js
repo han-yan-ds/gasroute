@@ -4,7 +4,8 @@ const knex = require('knex')(knexMode);
 const axios = require('axios');
 const {
   extractAddressPart,
-  addressStringSpacesToPluses
+  addressStringSpacesToPluses,
+  handleRequestErrors,
 } = require('../util/util');
 
 exports.postStation = async (stationObj, cb = (data) => data) => {
@@ -12,7 +13,7 @@ exports.postStation = async (stationObj, cb = (data) => data) => {
   if ((!stationObj.zip || stationObj.zip === '') && 
     ((!stationObj.city || stationObj.city === '') || 
     (!stationObj.state || stationObj.state === ''))) {
-      console.error('Need either a valid zip-code, or both city and state');
+      handleRequestErrors(null, 'Need either a valid zip-code, or both city and state');
       return;
   }
   // verify that the address is valid, using Google geocoding
@@ -39,12 +40,12 @@ exports.postStation = async (stationObj, cb = (data) => data) => {
           placeid: data.results[0].place_id
         }));
       } catch (err) {
-        console.error('Error in inserting station data');
+        handleRequestErrors(err, 'Error in inserting station data');
         return;
       }
     }
   } catch (err) {
-    console.error('Invalid address');
+    handleRequestErrors(err, 'Invalid address');
     return;
   }
 
@@ -59,7 +60,7 @@ exports.postPrice = async (priceObj, cb = (data) => data) => {
       octaneid: priceObj.octaneId,
     }));
   } catch (err) {
-    console.error('Error in inserting price data');
+    handleRequestErrors(err, 'Error in inserting price data');
     return;
   }
 }
@@ -74,7 +75,7 @@ exports.postReview = async (reviewObj, cb = (data) => data) => {
       reviewdescription: reviewObj.reviewDescription,
     }));
   } catch (err) {
-    console.error('Error in inserting review');
+    handleRequestErrors(err, 'Error in inserting review');
     return;
   }
 }
