@@ -12,3 +12,16 @@ exports.patchStation = async (testBody, cb = (data) => data) => {
     return;
   }
 }
+
+exports.toggleFlagPrice = async (priceBody, cb = (data) => data) => {
+  try {
+    cb(await knex('prices').where({
+      priceid: priceBody.priceId
+    }).update({
+      flagged: priceBody.flagged
+    }));
+  } catch (err) {
+    console.error('Error flagging price');
+    return;
+  }
+}
