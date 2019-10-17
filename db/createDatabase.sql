@@ -12,7 +12,8 @@ create table stations (
   needmembership bit default(cast(0 as bit)),
   latitude numeric(11, 7),
   longitude numeric(11, 7),
-  placeid varchar(30) UNIQUE
+  placeid varchar(30) UNIQUE,
+  archived bit default(cast(0 as bit))
 );
 
 create table octanes (
