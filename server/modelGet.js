@@ -22,7 +22,7 @@ exports.getSingleStation = async (stationId) => {
   }).select();
   let reviews = await knex('reviews').where({
     stationid: stationId,
-  })
+  }).select();
 
   return {
     stationInfo,
