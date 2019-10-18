@@ -5,6 +5,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const {
+  // getStations,
+  getSingleStation,
+} = require('./controllerGet');
+
+const {
   postStation,
   postPrice,
   // postUser,
@@ -32,10 +37,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
-// app.get('/stations'); // get X (default 6) closest stations to a given location, and with given octane rating
+// app.get('/stations', getStations); // get X (default 6) closest stations to a given location, and with given octane rating
   // ^ will also grab prices from these stations
   // ^ will also grab average rating from these stations
-// app.get('/stations/single'); // grab a single station, returns gas prices and reviews
+app.get('/stations/:stationid', getSingleStation); // grab a single station, returns gas prices and reviews
 app.post('/stations', postStation); // report new station
 app.post('/prices', postPrice); // report new price
 // app.post('/users', postUser); // add new user
