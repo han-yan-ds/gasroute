@@ -43,7 +43,8 @@ create index useridpricesindex on prices(userid);
 create table users (
   userid serial primary key,
   username varchar(50),
-  pwhash varchar(64)
+  pwhash varchar(64),
+  salt varchar(64)
 );
 
 create table reviews (
