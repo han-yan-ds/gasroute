@@ -1,5 +1,6 @@
 const modelPost = require('../models/modelPost');
 const moment = require('moment');
+const {createSalt} = require('../../util/util');
 
 exports.postStation = async (req, res) => {
   // remove
@@ -41,5 +42,22 @@ exports.postReview = async (req, res) => {
   res.json(response);
 }
 
-// exports.postUser
-  // register new user
+exports.postUser = async (req, res) => {
+  // HASHING WILL OCCUR ON CLIENT SIDE
+  // SALTING WILL OCCUR ON SERVER SIDE:
+    // 1) generate salt on server
+    // 2) send salt back to client
+    // 3) client hashes pw + salt
+    // 4) client sends hash to server
+    // this way, pw is NEVER passed over network
+  // remove
+  let testUser = {
+    username: 'badkitty',
+    // pw + salt: password-,m$guFn>p<^]zFq|G-XOeC2El,g-KFtGI,(>;]~
+    pwhash: 'FFEE9DBA991CDFCFA576093C34A1BA1FBE9E2809D3E2F65C90C22D08DCB89CE9',
+    salt: '-,m$guFn>p<^]zFq|G-XOeC2El,g-KFtGI,(>;]~'
+  };
+  // remove
+  let response = await modelPost.postUser(testUser);
+  res.json(response);  
+}

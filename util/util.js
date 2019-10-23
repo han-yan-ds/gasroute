@@ -1,6 +1,6 @@
 const hasher = require('create-hash')('sha256');
 const randomString = require('crypto-random-string');
-const EVERY_CHARACTER = '~`@#$%^&*()-_=+[]{}|\\;:"\'/?.><,1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+const EVERY_CHARACTER = '~`@#$%^&*()-_=+[]{}|;:/?.><,1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
 
 exports.createHash = (pw, salt = '') => {
   return hasher(pw + salt);
