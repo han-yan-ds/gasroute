@@ -79,3 +79,7 @@ exports.postReview = async (reviewObj, cb = (data) => data) => {
     return;
   }
 }
+
+exports.postUser = async (userObj, cb = (data) => data) => {
+  console.log('Post User is empty for now');
+}
