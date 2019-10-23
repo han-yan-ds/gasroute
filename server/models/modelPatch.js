@@ -1,13 +1,13 @@
 require('custom-env').env();
-const knexMode = require('../knexfile')[process.env.KNEX_MODE];
+const knexMode = require('../../knexfile')[process.env.KNEX_MODE];
 const knex = require('knex')(knexMode);
-const {handleRequestErrors} = require('../util/util');
+const {handleRequestErrors} = require('../../util/util');
 
 exports.patchStation = async (testBody, cb = (data) => data) => {
-  let placeid = testBody.placeid;
-  delete testBody.placeid;
+  let stationid = testBody.stationid;
+  delete testBody.stationid;
   try {
-    cb(await knex('stations').where({placeid}).update(testBody));
+    cb(await knex('stations').where({stationid}).update(testBody));
   } catch (err) {
     handleRequestErrors(err, 'Error Updating Station Info');
     return;

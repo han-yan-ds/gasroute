@@ -1,4 +1,4 @@
-const modelPost = require('./modelPost');
+const modelPost = require('../models/modelPost');
 const moment = require('moment');
 
 exports.postStation = async (req, res) => {

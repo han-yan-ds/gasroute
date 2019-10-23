@@ -1,8 +1,8 @@
 require('custom-env').env();
-const knexMode = require('../knexfile')[process.env.KNEX_MODE];
+const knexMode = require('../../knexfile')[process.env.KNEX_MODE];
 const knex = require('knex')(knexMode);
 const modelPatch = require('./modelPatch');
-const {handleRequestErrors} = require('../util/util');
+const {handleRequestErrors} = require('../../util/util');
 
 exports.archiveStation = async (stationId, cb = (data) => data) => {
   // should I delete station or merely archive it?????  deleting will mean I'll delete every price and review ever gotten from it
