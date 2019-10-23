@@ -2,10 +2,10 @@ require('custom-env').env();
 const knexMode = require('../knexfile')[process.env.KNEX_MODE];
 const knex = require('knex')(knexMode);
 const {handleRequestErrors} = require('../util/util');
+const {DEFAULT_GET_STATION_LIMIT} = require('../util/defaults');
 
-
-exports.getStations = async (lat, long, limit) => {
-
+exports.getStations = async (lat, long, limit = DEFAULT_GET_STATION_LIMIT) => {
+  
 }
 
 exports.getSingleStation = async (stationId) => {

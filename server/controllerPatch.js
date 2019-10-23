@@ -2,13 +2,15 @@ const modelPatch = require('./modelPatch');
 
 exports.patchStation = async (req, res) => {
   let testBody = {
+    stationid: Number(req.params.stationid),
     stationname: 'Conoco Uptown',
     // stationstreetaddress: ,
     // stationcity: ,
     // stationstate: ,
     // stationzip: ,
     // needmembership: ,
-    placeid: 'ChIJgSnWdCx5bIcROrkieGcWUck'
+    // placeid: 'ChIJgSnWdCx5bIcROrkieGcWUck'
+    archived: 0,
   };
   let response = await modelPatch.patchStation(testBody);
   res.json(response);
