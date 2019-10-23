@@ -1,4 +1,4 @@
-const modelGet = require('./modelGet');
+const modelGet = require('../models/modelGet');
 
 exports.getStations = async (req, res) => {
   let testBody = {

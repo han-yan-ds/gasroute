@@ -1,4 +1,4 @@
-const modelPatch = require('./modelPatch');
+const modelPatch = require('../models/modelPatch');
 
 exports.patchStation = async (req, res) => {
   let testBody = {
@@ -10,7 +10,6 @@ exports.patchStation = async (req, res) => {
     // stationzip: ,
     // needmembership: ,
     // placeid: 'ChIJgSnWdCx5bIcROrkieGcWUck'
-    archived: 0,
   };
   let response = await modelPatch.patchStation(testBody);
   res.json(response);

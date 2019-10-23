@@ -1,4 +1,4 @@
-const modelDelete = require('./modelDelete');
+const modelDelete = require('../models/modelDelete');
 
 exports.archiveStation = async (req, res) => {
   // should I delete station or merely archive it?????  deleting will mean I'll delete every price and review ever gotten from it

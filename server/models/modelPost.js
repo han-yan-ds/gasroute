@@ -1,12 +1,12 @@
 require('custom-env').env();
-const knexMode = require('../knexfile')[process.env.KNEX_MODE];
+const knexMode = require('../../knexfile')[process.env.KNEX_MODE];
 const knex = require('knex')(knexMode);
 const axios = require('axios');
 const {
   extractAddressPart,
   addressStringSpacesToPluses,
   handleRequestErrors,
-} = require('../util/util');
+} = require('../../util/util');
 
 exports.postStation = async (stationObj, cb = (data) => data) => {
   // make sure there's enough information to geocode first

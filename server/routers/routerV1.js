@@ -3,14 +3,14 @@ const routerV1 = require('express').Router();
 const {
   // getStations,
   getSingleStation,
-} = require('../controllerGet');
+} = require('../controllers/controllerGet');
 
 const {
   postStation,
   postPrice,
   // postUser,
   postReview
-} = require('../controllerPost');
+} = require('../controllers/controllerPost');
 
 const {
   patchStation,
@@ -19,13 +19,13 @@ const {
   unflagPrice,
   flagReview,
   unflagReview
-} = require('../controllerPatch');
+} = require('../controllers/controllerPatch');
 
 const {
   archiveStation,
   deletePrice,
   deleteReview,
-} = require('../controllerDelete');
+} = require('../controllers/controllerDelete');
 
 // routerV1.get('/stations', getStations); // get X (default 6) closest stations to a given location, and with given octane rating
 // ^ will also grab prices from these stations
