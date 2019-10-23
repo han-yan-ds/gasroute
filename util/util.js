@@ -1,3 +1,9 @@
+const hasher = require('create-hash')('sha256');
+
+exports.createHash = (pw, salt = '') => {
+  return hasher(pw + salt);
+}
+
 exports.extractAddressPart = (components, part, getLong = true) => {
   // part has to be a string: street_number/route/locality/administrative_area_level_1/postal_code
   for (let addressPart of components) {
